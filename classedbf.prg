@@ -1,7 +1,6 @@
 #Include "Minigui.ch"
 #Include "hbclass.ch"
 
-#Define DRIVER "DBFCDX"
 Class criadbf
 
 DATA aDados 	INIT {}
