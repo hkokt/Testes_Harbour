@@ -1,42 +1,62 @@
 #Include "Minigui.ch"
 #Include "hbclass.Ch"
-
+*==========================================*
 Class janelas
-
-DATA prm INIT {'nome',0,0,300,300,'Main'} 
+*==========================================*
+/*{<nomejanela>,<posiçãox>,<posiçãoy>,<tamanhox>,<tamanhoy>,<títulojanela>}*/
+DATA prmWin INIT {'nome',0,0,300,300,'Main'} 
+DATA prmBot INIT {}
 
 Method pegaPara()
-Method cria()
-Method ativa()
+**Method pegaParaBot(prmBot)
+Method criaMain()
+Method ativa() 
 
 End Class 
 
+
+*------------------------------------------*
 Method pegaPara(params) Class janelas
+*------------------------------------------*
 Local i
 
 for i := 1 to Len(params)
 
-	::prm[i] :=  params[i]
+	::prmWin[i] :=  params[i]
 
-next 
+next
+
+Return ::prmWin
 
 
-Return ::prm
+*------------------------------------------*
+Method criaMain() Class janelas
+*------------------------------------------*
 
-Method cria() Class janelas
-
-	Define Window &(::prm[1]) ;
-	At ::prm[2],::prm[3];
-	Width ::prm[4] Height ::prm[5];
-	Title ::prm[6] ;
-	Main ;
+	Define Window &(::prmWin[1]) ;
+	At ::prmWin[2],::prmWin[3] ;
+	Width ::prmWin[4] Height ::prmWin[5] ;
+	Title ::prmWin[6] ;
+	Main;
 	Nomaximize ;
 	Nosize
-
-	End window
-
+	
 Return Self
 
-Method ativa()Class janelas
-	Activate Window &(::prm[1])
-Return self
+*------------------------------------------*
+Method criabot(prmBot)Class janelas
+*------------------------------------------*
+
+local botao:= botao:new()
+botao:montabt(prmBot)
+
+
+return self
+
+*------------------------------------------*
+Method ativa() Class janelas 
+*------------------------------------------*
+	end window 
+	activate window &(::prmWin[1])
+	
+return self
