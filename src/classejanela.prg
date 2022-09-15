@@ -1,62 +1,56 @@
 #Include "Minigui.ch"
 #Include "hbclass.Ch"
-*==========================================*
-Class janelas
-*==========================================*
-/*{<nomejanela>,<posiçãox>,<posiçãoy>,<tamanhox>,<tamanhoy>,<títulojanela>}*/
-DATA prmWin INIT {'nome',0,0,300,300,'Main'} 
-DATA prmBot INIT {}
 
-Method pegaPara()
-**Method pegaParaBot(prmBot)
+Class janelas
+
+DATA sNome INIT 'NAME'
+DATA nAt1 INIT 0
+DATA nAt2 INIT 0
+DATA nWidth INIT 400
+DATA nHeight INIT 400
+DATA sTitle INIT 'TITULO WIN GENERIC'
+
+Method paraWin(sNome, nAt1, nAt2, nWidth, nHeight,sTitle)
 Method criaMain()
-Method ativa() 
+Method addbotao()
+Method ativaWin() 
 
 End Class 
 
 
-*------------------------------------------*
-Method pegaPara(params) Class janelas
-*------------------------------------------*
-Local i
+Method paraWin(nome,at1,at2,width,height,title) Class janelas
 
-for i := 1 to Len(params)
+::sNome := nome
+::nAt1 := at1
+::nAt2 := at2
+::nWidth := width
+::nHeight := height
+::sTitle := title
 
-	::prmWin[i] :=  params[i]
+Return Self 
 
-next
-
-Return ::prmWin
-
-
-*------------------------------------------*
 Method criaMain() Class janelas
-*------------------------------------------*
 
-	Define Window &(::prmWin[1]) ;
-	At ::prmWin[2],::prmWin[3] ;
-	Width ::prmWin[4] Height ::prmWin[5] ;
-	Title ::prmWin[6] ;
-	Main;
+	Define Window &(::sNome) ;
+	At ::nAt1,::nAt2 ;
+	Width ::nWidth Height ::nHeight ;
+	Title ::sTitle ;
+	Main ;
 	Nomaximize ;
 	Nosize
 	
 Return Self
 
-*------------------------------------------*
-Method criabot(prmBot)Class janelas
-*------------------------------------------*
+Method addbotao(at1,at2,nome,caption) Class janelas 
 
-local botao:= botao:new()
-botao:montabt(prmBot)
+@at1,at2 button &(nome);
+caption caption;
 
+Return Self
 
-return self
+Method ativaWin() Class janelas 
 
-*------------------------------------------*
-Method ativa() Class janelas 
-*------------------------------------------*
 	end window 
-	activate window &(::prmWin[1])
+	activate window &(::sNome)
 	
 return self
